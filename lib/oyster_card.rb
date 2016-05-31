@@ -1,6 +1,5 @@
 class OysterCard
 
-  def balance
-  end
+  attr_reader :balance
 
 end
