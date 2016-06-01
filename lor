@@ -1,8 +1,8 @@
 Run options: include {:focus=>true}
 
 All examples were filtered out; ignoring {:focus=>true}
-[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m
+[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m
 
-Finished in 0.02176 seconds (files took 0.07998 seconds to load)
-[32m18 examples, 0 failures[0m
+Finished in 0.0224 seconds (files took 0.1089 seconds to load)
+[32m26 examples, 0 failures[0m
 

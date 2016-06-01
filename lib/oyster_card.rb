@@ -8,10 +8,11 @@ class OysterCard
   attr_reader :balance, :from, :journey_log, :journey
 
 
-  def initialize()
+  def initialize#(j = Journey.new)
     @balance = 0 # => pounds
     @journey_log = []
     @journey = {}
+    #@j = j
   end
 
   def top_up(value)
@@ -26,6 +27,8 @@ class OysterCard
   def touch_in(station)
     fail('Balance insufficient') if @balance < MIN_BALANCE
     journey.store(:entry_station, station)
+
+    #j.entry_station(station)
   end
 
   def touch_out(station)
