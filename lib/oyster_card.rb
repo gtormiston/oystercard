@@ -1,3 +1,5 @@
+require_relative "journey"
+
 class OysterCard
 
   MAX_BALANCE = 90 # => pounds
@@ -5,14 +7,12 @@ class OysterCard
   MIN_CHARGE = 1 # => pounds
 
 
-  attr_reader :balance, :from, :journey_log, :journey
+  attr_reader :balance
 
 
-  def initialize#(j = Journey.new)
+  def initialize(journey = Journey.new)
     @balance = 0 # => pounds
-    @journey_log = []
-    @journey = {}
-    #@j = j
+    @journey = journey
   end
 
   def top_up(value)
@@ -20,21 +20,15 @@ class OysterCard
     @balance += value
   end
 
-  def in_journey?
-    journey.include?(:entry_station) && !journey.include?(:exit_station)
-  end
 
   def touch_in(station)
     fail('Balance insufficient') if @balance < MIN_BALANCE
-    journey.store(:entry_station, station)
-
-    #j.entry_station(station)
+    @journey.entry_station(station)
   end
 
   def touch_out(station)
     deduct(MIN_CHARGE)
-    journey.store(:exit_station, station)
-    journey_log << journey
+    @journey.exit_station(station)
   end
 
   private

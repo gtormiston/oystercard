@@ -13,6 +13,7 @@ class Journey
 	end
 
 	def entry_station(station)
+		@journey = {}
 		journey.store(:entry_station, station)
 		@in_journey = true
 	end

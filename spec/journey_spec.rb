@@ -9,7 +9,7 @@ describe Journey do
   let(:journey) { {entry_station: origin_station, exit_station: exit_station}}
   let(:min_balance) { 1 }
   let(:min_charge) { 1 }
-	
+
 	context 'at initialisation' do
 
 		it "#in_journey? returns false" do
@@ -47,6 +47,7 @@ describe Journey do
     end
 
 	end
+
 
 
   context "When subject is in journey" do
