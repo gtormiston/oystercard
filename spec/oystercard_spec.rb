@@ -32,22 +32,21 @@ describe OysterCard do
 
   describe 'Current journey' do
 
-    it 'creates an entry station when you touch in' do
+    before do
       oyster_card.top_up(OysterCard::MIN_BALANCE + 1)
       oyster_card.touch_in(origin_station)
+    end
+
+    it 'creates an entry station when you touch in' do
       expect(oyster_card.journey[:entry_station]).to eq(origin_station)
     end
 
     it 'creates an exit station when you touch out' do
-      oyster_card.top_up(OysterCard::MIN_BALANCE + 1)
-      oyster_card.touch_in(origin_station)
       oyster_card.touch_out(exit_station)
       expect(oyster_card.journey[:exit_station]).to eq(exit_station)
     end
 
     it 'adds the journey hash to journey_log' do
-      oyster_card.top_up(OysterCard::MIN_BALANCE + 1)
-      oyster_card.touch_in(origin_station)
       oyster_card.touch_out(exit_station)
       expect(oyster_card.journey_log).to include journey
     end
