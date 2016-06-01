@@ -1,8 +1,23 @@
 Run options: include {:focus=>true}
 
 All examples were filtered out; ignoring {:focus=>true}
-[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m
+[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[31mF[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m
 
-Finished in 0.02417 seconds (files took 0.08182 seconds to load)
-[32m19 examples, 0 failures[0m
+Failures:
+
+  1) Journey#fare with penalty returns a penalty fare if trying to exit with no entry_station
+     [31mFailure/Error: expect(subject.fare).to eq(Journey::PENALTY_FARE)[0m
+     [31m[0m
+     [31m  expected: 6[0m
+     [31m       got: 1[0m
+     [31m[0m
+     [31m  (compared using ==)[0m
+     [36m# ./spec/journey_spec.rb:82:in `block (4 levels) in <top (required)>'[0m
+
+Finished in 0.05139 seconds (files took 0.20367 seconds to load)
+[31m22 examples, 1 failure[0m
+
+Failed examples:
+
+[31mrspec ./spec/journey_spec.rb:81[0m [36m# Journey#fare with penalty returns a penalty fare if trying to exit with no entry_station[0m
 

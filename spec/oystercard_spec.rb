@@ -63,18 +63,6 @@ describe OysterCard do
   end
 
 
-  describe "#fare" do
-    context "without penalty" do
-      it "returns minimum fare" do
-        oyster_card.top_up(min_charge)
-        oyster_card.touch_in(origin_station)
-
-      end
-    end
-
-
-
-  end
 
 
 

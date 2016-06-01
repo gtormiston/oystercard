@@ -5,10 +5,9 @@ class OysterCard
   MAX_BALANCE = 90 # => pounds
   MIN_BALANCE = 1 # => pounds
   MIN_CHARGE = 1 # => pounds
-
+  PENALTY_FARE = 6
 
   attr_reader :balance
-
 
   def initialize(journey = Journey.new)
     @balance = 0 # => pounds
@@ -31,9 +30,13 @@ class OysterCard
     @journey.exit_station(station)
   end
 
-  private
-
-  def deduct(value)
-    @balance -= value
+  def fare
+    MIN_CHARGE
   end
+
+    private
+
+    def deduct(value)
+      @balance -= value
+    end
 end

@@ -45,25 +45,41 @@ describe Journey do
       subject.exit_station(exit_station)
       expect(subject.journey_log).to include journey
     end
-
 	end
 
-
-
   context "When subject is in journey" do
+    it "in_journey = true when entry_station" do
+      subject.entry_station(origin_station)
+      expect(subject).to be_in_journey
+    end
 
-      it "in_journey = true when entry_station" do
-        subject.entry_station(origin_station)
-        expect(subject).to be_in_journey
-      end
+    it "in_journey = false when exit_station" do
+      subject.entry_station(origin_station)
+      subject.exit_station(exit_station)
+      expect(subject).not_to be_in_journey
+    end
+   end
 
-      it "in_journey = false when exit_station" do
+
+  describe "#fare" do
+    context "without penalty" do
+      it "returns minimum fare" do
         subject.entry_station(origin_station)
         subject.exit_station(exit_station)
-        expect(subject).not_to be_in_journey
+        expect(subject.fare).to eq(Journey::MIN_CHARGE)
       end
-
     end
+
+    context 'with penalty' do
+      it 'returns a penalty fare if trying to exit with no entry_station' do
+        expect(subject.fare).to eq(Journey::PENALTY_FARE)
+      end 
+
+      it 'returns a penalty fare if trying to enter with an exit_station' do
+
+      end
+    end
+  end
 
 
 

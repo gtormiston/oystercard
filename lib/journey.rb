@@ -1,5 +1,8 @@
 class Journey
 
+	MIN_CHARGE = 1
+	PENALTY_FARE = 6
+
 	attr_reader :journey_log, :journey
 
 	def initialize
@@ -22,6 +25,10 @@ class Journey
 		journey.store(:exit_station, station)
 		journey_log << journey
 		@in_journey = false
+	end
+
+	def fare 
+		MIN_CHARGE
 	end
 
 end
