@@ -32,17 +32,20 @@ describe Journey do
       journey.finish(station2)
       expect(journey.end_station).to eq station2
     end
-  end
-
-  describe '#fare' do
-    it 'has a default fare value' do
-      expect(journey.fare).to eq 1
+    
+    it 'calls deduct on balance' do
+      journey.finish(station2)
+      expect(balance_spy).to have_received(:deduct)
     end
 
-    # it 'charges penalty fare' do
-    #   journey.finish(station2)
-    #   expect(journey.fare).to eq 6
-    # end
+    context 'penalty fare' do
+      before do
+        journey.finish(station2)
+      end
+      it 'charges a penalty fare when the user attemts to finish before start is called' do
+        expect{ journey.end_station }.to raise_error("Penalty fare has been charged")
+      end
+    end
   end
 
   describe '#fresh' do

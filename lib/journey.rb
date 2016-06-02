@@ -1,9 +1,7 @@
 require_relative 'balance'
 
 class Journey
-  attr_reader :entry_station, :end_station, :in_journey, :all_journeys, :balance
-
-  MINIMUM_FARE = 1
+  attr_reader :entry_station, :end_station, :in_journey, :all_journeys, :balance, :fare
 
   def initialize(balance = Balance.new)
     @entry_station
@@ -11,6 +9,7 @@ class Journey
     @in_journey = false
     @all_journeys = {}
     @balance = balance
+    @fare = MINIMUM_FARE
   end
 
   def start(station)
@@ -21,17 +20,19 @@ class Journey
   def finish(station)
     @end_station = station
     @all_journeys[entry_station] = end_station
+    balance.deduct(fare)
     @in_journey = false
-
-  end
-
-  def fare
-    @fare = MINIMUM_FARE
   end
 
   def fresh
     @entry_station= nil
     @end_station= nil
   end
+
+  private
+  
+
+  MINIMUM_FARE = 1
+
 
 end
