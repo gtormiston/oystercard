@@ -1,4 +1,5 @@
 require_relative 'balance'
+require_relative 'payment'
 
 class Journey
   attr_reader :entry_station, :end_station, :in_journey, :all_journeys, :balance, :fare
@@ -19,11 +20,10 @@ class Journey
   def finish(station)
     penalty_end unless in_journey
     @end_station = station
-    payment
+    Payment.payment(balance, fare)
     journey
     fresh
   end
-
 
     private
     
@@ -31,10 +31,6 @@ class Journey
     PENALTY_FARE = 6
     def journey
       @all_journeys.push({entry_station => end_station})
-    end
-    
-    def payment
-      balance.deduct(fare)
     end
 
     def fresh
@@ -50,12 +46,12 @@ class Journey
 
     def penalty_start
       @in_journey = false
-      penalty_fare
+      Payment.penalty(balance)
     end
 
     def penalty_end
       @in_journey = true
-      penalty_fare
+      Payment.penalty(balance)
     end
 
 
