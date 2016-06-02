@@ -4,10 +4,8 @@ class Journey
   attr_reader :entry_station, :end_station, :in_journey, :all_journeys, :balance, :fare
 
   def initialize(balance = Balance.new)
-    @entry_station
-    @end_station
     @in_journey = false
-    @all_journeys = {}
+    @all_journeys = []
     @balance = balance
     @fare = MINIMUM_FARE
   end
@@ -21,20 +19,29 @@ class Journey
   def finish(station)
     penalty_end unless in_journey
     @end_station = station
-    @all_journeys[entry_station] = end_station
-    balance.deduct(fare)
-    @in_journey = false
+    payment
+    journey
+    fresh
   end
 
-  def fresh
-    @entry_station= nil
-    @end_station= nil
-  end
 
     private
     
     MINIMUM_FARE = 1
     PENALTY_FARE = 6
+    def journey
+      @all_journeys.push({entry_station => end_station})
+    end
+    
+    def payment
+      balance.deduct(fare)
+    end
+
+    def fresh
+      @entry_station= nil
+      @end_station= nil
+      @in_journey = false
+    end
 
     def penalty_fare 
       balance.deduct(PENALTY_FARE)
