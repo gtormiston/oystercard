@@ -32,16 +32,12 @@ describe Oystercard do
       card.top_up(5)
     end
 
-    xit 'calls start on the journey object' do
+    it 'calls start on the journey object' do
       spy_card.top_up(5)
       spy_card.touch_in(station1)
       expect(journey_spy).to have_received(:start)
     end
 
-    xit "raises an error if balance is insufficient" do
-      blank_card = Oystercard.new
-      expect{ blank_card.touch_in(station1) }.to raise_error("Insufficient funds")
-    end
   end
 
   context '#touch_out' do
@@ -50,19 +46,13 @@ describe Oystercard do
       card.touch_in(station1)
     end
     
-    xit 'calls end on the journey object' do
+    it 'calls end on the journey object' do
       spy_card.top_up(5)
       spy_card.touch_in(station1)
       spy_card.touch_out(station2)
       expect(journey_spy).to have_received(:finish)
     end
 
-    xit "sets entry station to nil" do
-      spy_card.top_up(5)
-      spy_card.touch_in(station1)
-      spy_card.touch_out(station2)
-      expect(journey_spy).to have_received(:fresh)
-    end	
   end
 
   context ':balance' do

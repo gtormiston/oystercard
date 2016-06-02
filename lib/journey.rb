@@ -13,11 +13,13 @@ class Journey
   end
 
   def start(station)
+    penalty_start if in_journey
     @entry_station= station
     @in_journey= true
   end
 
   def finish(station)
+    penalty_end unless in_journey
     @end_station = station
     @all_journeys[entry_station] = end_station
     balance.deduct(fare)
@@ -29,10 +31,25 @@ class Journey
     @end_station= nil
   end
 
-  private
-  
+    private
+    
+    MINIMUM_FARE = 1
+    PENALTY_FARE = 6
 
-  MINIMUM_FARE = 1
+    def penalty_fare 
+      balance.deduct(PENALTY_FARE)
+      fail "Penalty fare has been charged, try again"
+    end
+
+    def penalty_start
+      @in_journey = false
+      penalty_fare
+    end
+
+    def penalty_end
+      @in_journey = true
+      penalty_fare
+    end
 
 
 end

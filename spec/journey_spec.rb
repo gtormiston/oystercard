@@ -16,6 +16,11 @@ describe Journey do
       journey.start(station1)
       expect(journey.entry_station).to eq station1
     end
+
+    it 'charges a penalty fare' do
+      journey.start(station1)
+      expect{journey.start(station1)}.to raise_error("Penalty fare has been charged, try again")
+    end
   end
 
   describe '#finish' do
@@ -43,7 +48,7 @@ describe Journey do
         journey.finish(station2)
       end
       it 'charges a penalty fare when the user attemts to finish before start is called' do
-        expect{ journey.end_station }.to raise_error("Penalty fare has been charged")
+        expect{ journey.finish(station2) }.to raise_error("Penalty fare has been charged, try again")
       end
     end
   end
