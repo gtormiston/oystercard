@@ -4,9 +4,9 @@ require_relative 'payment'
 class Journey
   attr_reader :entry_station, :end_station, :in_journey, :all_journeys, :balance, :fare
 
-  def initialize(balance = Balance.new)
+  def initialize(balance = Balance.new, log= Log.new)
     @in_journey = false
-    @all_journeys = []
+    @all_journeys = log
     @balance = balance
     @fare = MINIMUM_FARE
   end
@@ -20,18 +20,13 @@ class Journey
   def finish(station)
     penalty_end unless in_journey
     @end_station = station
-    Payment.payment(balance, fare)
-    journey
-    fresh
+    wind_down
   end
 
     private
     
     MINIMUM_FARE = 1
     PENALTY_FARE = 6
-    def journey
-      @all_journeys.push({entry_station => end_station})
-    end
 
     def fresh
       @entry_station= nil
@@ -39,9 +34,10 @@ class Journey
       @in_journey = false
     end
 
-    def penalty_fare 
-      balance.deduct(PENALTY_FARE)
-      fail "Penalty fare has been charged, try again"
+    def wind_down
+      Payment.payment(balance, fare)
+      all_journeys.log(entry_station, end_station)
+      fresh
     end
 
     def penalty_start

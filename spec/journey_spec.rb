@@ -5,6 +5,7 @@ describe Journey do
   let(:station1) { double(:station1, :data => {:monument => 1}) }
   let(:station2) { double(:station2, :data => {:aldgate_east => 2}) }
   let(:balance_spy) { spy(:balance_spy) } 
+  let(:log_spy) { spy(:log_spy) }
 
   describe "#start" do
 
@@ -35,7 +36,7 @@ describe Journey do
 
     it 'sets the end station' do
       journey.finish(station2)
-      expect(journey.all_journeys.last.values.pop).to eq station2
+      expect(journey.all_journeys.all.last.values.pop).to eq station2
     end
     
     it 'calls deduct on balance' do
@@ -75,27 +76,22 @@ describe Journey do
   end
 
   describe ':all_journeys' do
-    it 'creates an empty all_journeys hash' do
-      expect(journey.all_journeys).to respond_to(:each)
-    end
     
     context 'recording journeys' do
-      before(:each) do
-        journey.start(station1)
-        journey.finish(station2)
-      end
 
       it 'generates a journey' do
-        expect(journey.all_journeys).to eq([{station1 => station2}])
+        spy_journey = Journey.new(balance_spy, log_spy)
+        spy_journey.all_journeys.all
+        expect(log_spy).to have_recieved(:all)
       end
       
       it'generates multiple journeys' do
-        3.times do
+        4.times do
           journey.start(station1)
           journey.finish(station2)
         end
-        expect(journey.all_journeys).to eq([{station1 => station2},
-          {station1 => station2}, {station1 => station2}, {station1 =>station2}])
+        expect(journey.all_journeys.all).to eq([{station1 => station2},
+          {station1 => station2}, {station1 => station2}, {station1 => station2}])
       end
     end
   end
