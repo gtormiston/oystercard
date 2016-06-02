@@ -1,13 +1,16 @@
+require_relative 'balance'
+
 class Journey
-  attr_reader :entry_station, :end_station, :in_journey, :all_journeys
+  attr_reader :entry_station, :end_station, :in_journey, :all_journeys, :balance
 
   MINIMUM_FARE = 1
 
-  def initialize
+  def initialize(balance = Balance.new)
     @entry_station
     @end_station
     @in_journey = false
     @all_journeys = {}
+    @balance = balance
   end
 
   def start(station)
@@ -19,6 +22,7 @@ class Journey
     @end_station = station
     @all_journeys[entry_station] = end_station
     @in_journey = false
+
   end
 
   def fare

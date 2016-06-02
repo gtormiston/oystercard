@@ -1,9 +1,10 @@
 require 'journey'
 
 describe Journey do
-  subject (:journey) { described_class.new }
+  subject (:journey) { described_class.new(balance_spy) }
   let(:station1) { double(:station1, :data => {:monument => 1}) }
   let(:station2) { double(:station2, :data => {:aldgate_east => 2}) }
+  let(:balance_spy) { spy(:balance_spy) } 
 
   describe "#start" do
 
