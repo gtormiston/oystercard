@@ -1,3 +1,5 @@
+# adjusts the balance 
+
 require_relative 'balance'
 
 module Payment

@@ -1,14 +1,17 @@
+# understands the process of journeys
+
 require_relative 'balance'
 require_relative 'payment'
+require_relative 'log'
+require_relative 'fare'
 
 class Journey
-  attr_reader :entry_station, :end_station, :in_journey, :all_journeys, :balance, :fare
+  attr_reader :entry_station, :end_station, :in_journey, :all_journeys, :balance
 
   def initialize(balance = Balance.new, log= Log.new)
     @in_journey = false
     @all_journeys = log
     @balance = balance
-    @fare = MINIMUM_FARE
   end
 
   def start(station)
@@ -24,14 +27,15 @@ class Journey
   end
 
     private
-    
-    MINIMUM_FARE = 1
-    PENALTY_FARE = 6
 
     def fresh
       @entry_station= nil
       @end_station= nil
       @in_journey = false
+    end
+
+    def fare 
+      Fare.calculate(entry_station, end_station)
     end
 
     def wind_down

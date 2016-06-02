@@ -1,3 +1,5 @@
+# controller class / interface for the human
+
 require_relative 'journey'
 
 class Oystercard
@@ -22,6 +24,10 @@ class Oystercard
 
   def current_balance
     balance.current
+  end
+
+  def journey_log
+    journey.all_journeys.all
   end
 
     private

@@ -1,3 +1,5 @@
+# understands the balance on the card
+
 class Balance
 
   attr_reader :current
