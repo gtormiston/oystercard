@@ -1,7 +1,7 @@
 require_relative 'journey'
 
 class Oystercard
-  attr_reader :balance, :entry_station, :journeys, :journey
+  attr_reader :balance, :entry_station, :journey
 
   def initialize(journey= Journey.new)
     @balance = DEFAULT_MIN

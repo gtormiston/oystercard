@@ -1,6 +1,6 @@
 class Journey
   attr_reader :entry_station, :end_station, :in_journey, :all_journeys
-  
+
   MINIMUM_FARE = 1
 
   def initialize
