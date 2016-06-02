@@ -94,31 +94,4 @@ describe Oystercard do
       expect(card.balance).to eq 0
     end
   end
-
-  context ':journeys' do
-    before(:each) do
-      card.top_up(5)
-    end
-
-    context "journey generation" do
-      before(:each) do
-        card.touch_in(station1)
-        card.touch_out(station2)
-      end
-
-    #   it 'generates a journey' do
-    #     expect(card.journeys).to eq({station1.data => station2.data})
-    #   end
-
-    #   it 'generates multiple journeys' do
-    #     3.times do
-    #       card.touch_in(station1)
-    #       card.touch_out(station2)
-    #     end
-    #     expect(card.journeys).to eq({station1.data => station2.data, station1.data => station2.data,
-    #                                  station1.data=> station2.data, station1.data => station2.data})
-    #   end
-     end
-  end
-
 end
