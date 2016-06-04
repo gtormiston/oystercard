@@ -23,7 +23,11 @@ DEPENDENCIES
   rspec
 
 RUBY VERSION
+<<<<<<< HEAD
    ruby 2.2.3p173
+=======
+   ruby 2.3.1p112
+>>>>>>> day-four
 
 BUNDLED WITH
    1.12.5
